@@ -1,0 +1,24 @@
+td{
+
+  width:83px;
+  height:83px;
+  background-repeat:no-repeat;
+  background-size:50px;
+  border: 2px solid blue;
+}
+
+table{
+  cursor: pointer;
+  width:250px; 
+  height:250px; 
+  margin-left:50px;
+}
+
+#restart{
+  margin-left:50px;
+}
+
+.winClass {
+
+  background-color:#00FFFF;
+}
