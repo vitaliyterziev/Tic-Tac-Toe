@@ -18,7 +18,7 @@ var winCombinations = [
     [2, 4, 6]
 ];
 var interval = null;
-
+ 
 
 // none AI (PVP)
 $(document).ready(function() {
