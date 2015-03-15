@@ -1,3 +1,5 @@
+
+
 //variable declarations
 var imageX = '<img src="media/x.png" style="margin-left:15px;">';
 var imageO = '<img src="media/o.png" style="margin-left:15px;">';
@@ -17,7 +19,8 @@ var winCombinations = [
 ];
 var interval = null;
 
-// None AI (PVP) 
+
+// none AI (PVP)
 $(document).ready(function() {
 
     $('td').each(idAttach);
@@ -29,11 +32,10 @@ $(document).ready(function() {
         winCheck(XboxesClicked);
         winCheck(OboxesClicked);
     }, 1000);
-
 });
 
 
-//click helper function
+//click helper function, we check clickCount var and decide which picture to apply O or X
 var clickHandler = function() {
 
     if (!$(this).html()) {
@@ -59,7 +61,7 @@ var idAttach = function() {
 }
 
 
-//tracking moves function and pushing them to 2 arrays
+//tracking moves function and pushing them to 2 arrays 1 for X one for O
 var movesTrack = function() {
 
     if ($(this).html() == imageX) {
@@ -69,7 +71,6 @@ var movesTrack = function() {
 
         OboxesClicked.push(parseInt($(this).prop('id')));
     }
-
 }
 
 
@@ -77,7 +78,7 @@ var movesTrack = function() {
 var winCheck = function(checkedBoxes) {
 
     var counter = 0;
-    var checkedBoxes = new Set(checkedBoxes);
+    var checkedBoxes = new Set(checkedBoxes);// we need unique ID's in the provided array
 
     for (var x = 0; x < winCombinations.length; x++) {
 
