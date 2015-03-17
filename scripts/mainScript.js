@@ -80,9 +80,9 @@ var winCheck = function(checkedBoxes) {
     var counter = 0;
     var checkedBoxes = new Set(checkedBoxes);// we need unique ID's in the provided array
 
-    for (var x = 0; x < winCombinations.length; x++) {
+    for (var x of winCombinations) {
 
-        winCombinations[x].forEach(function(entry) {
+        x.forEach(function(entry) {
 
             checkedBoxes.forEach(function(entryC) {
 
@@ -96,7 +96,7 @@ var winCheck = function(checkedBoxes) {
         if (counter == 3) {
 
             //using win function with css class attached to it
-            winDecorator(winCombinations[x]);
+            winDecorator(x);
             clearInterval(interval);
             break;
         } else {
