@@ -96,8 +96,8 @@ var winCheck = function(checkedBoxes) {
         if (counter == 3) {
 
             //using win function with css class attached to it
-            winDecorator(winCombinations[x]);
             clearInterval(interval);
+            winDecorator(winCombinations[x]);
             break;
         } else {
 
