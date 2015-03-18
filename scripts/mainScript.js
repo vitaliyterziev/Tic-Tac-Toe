@@ -136,17 +136,17 @@ var winDecorator = function(winingCombination) {
 
 //filter function for replacing Set() in IE
 var compatSet = function(element) {
-		
-		var tempArray = [];
-		var boolCheck = true;
-		for(var x = 0; x < tempArray.length; x++) {
-		
-			if(element == tempArray[x]){
-			
-				boolCheck = false;
-			}
-		}
-		return boolCheck;
+
+    var tempArray = [];
+    var boolCheck = true;
+    for (var x = 0; x < tempArray.length; x++) {
+
+        if (element == tempArray[x]) {
+
+            boolCheck = false;
+        }
+    }
+    return boolCheck;
 }
 
 
