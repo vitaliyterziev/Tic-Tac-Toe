@@ -1,4 +1,4 @@
 # tic-tac-toe
-simple browser game (IE until 11 not supported)
+simple browser game 
 
 Files are self explanatory, download ZIP and run with .htm file
