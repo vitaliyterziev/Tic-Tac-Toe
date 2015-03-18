@@ -56,7 +56,7 @@ var clickHandler = function() {
 //id function for all td boxes
 var idAttach = function() {
 
-    this.id = elementCount;
+    $(this.id = elementCount);
     elementCount++;
 }
 
@@ -78,11 +78,11 @@ var movesTrack = function() {
 var winCheck = function(checkedBoxes) {
 
     var counter = 0;
-    var checkedBoxes = compatSet(checkedBoxes);// we need unique ID's in the provided array
+    var checkedBoxes = new Set(checkedBoxes);// we need unique ID's in the provided array
 
-    for (var x = 0; x < winCombinations.length; x++) {
+    for (var x of winCombinations) {
 
-        winCombinations[x].forEach(function(entry) {
+        x.forEach(function(entry) {
 
             checkedBoxes.forEach(function(entryC) {
 
@@ -96,8 +96,8 @@ var winCheck = function(checkedBoxes) {
         if (counter == 3) {
 
             //using win function with css class attached to it
+            winDecorator(x);
             clearInterval(interval);
-            winDecorator(winCombinations[x]);
             break;
         } else {
 
@@ -133,27 +133,5 @@ var winDecorator = function(winingCombination) {
     });
 }
 
-
-//filter function for replacing Set() in IE
-var compatSet = function(arrayToClean) {
-
-    var tempArray = [];
-    var boolCheck = true;
-    for (var x = 0; x < arrayToClean.length; x++) {
-
-        for (var y = 0; y < tempArray.length; y++)
-
-            if (arrayToClean[x] == tempArray[y]) {
-
-                boolCheck = false;
-            }
-
-        if (boolCheck) {
-
-            tempArray.push(arrayToClean[x]);
-        }
-    }
-    return tempArray;
-}
 
 //AI Must lie here, one module with couple of functions
