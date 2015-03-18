@@ -1,8 +1,8 @@
 
 
 //variable declarations
-var imageX = '<img src="media/x.png" style="margin-left:15px;">';
-var imageO = '<img src="media/o.png" style="margin-left:15px;">';
+var imageX = '<img style="margin-left: 15px;" src="media/x.png">';
+var imageO = '<img style="margin-left: 15px;" src="media/o.png">';
 var clickCount = 0,
     elementCount = 0;
 var XboxesClicked = [],
@@ -56,7 +56,7 @@ var clickHandler = function() {
 //id function for all td boxes
 var idAttach = function() {
 
-    $(this.id = elementCount);
+    this.id = elementCount;
     elementCount++;
 }
 
@@ -78,7 +78,7 @@ var movesTrack = function() {
 var winCheck = function(checkedBoxes) {
 
     var counter = 0;
-    var checkedBoxes = new Set(checkedBoxes);// we need unique ID's in the provided array
+    var checkedBoxes = checkedBoxes.filter(compatSet);// we need unique ID's in the provided array
 
     for (var x of winCombinations) {
 
@@ -131,6 +131,22 @@ var winDecorator = function(winingCombination) {
 
         $('td').eq(comb).addClass('winClass');
     });
+}
+
+
+//filter function for replacing Set() in IE
+var compatSet = function(element) {
+		
+		var tempArray = [];
+		var boolCheck = true;
+		for(var x = 0; x < tempArray.length; x++) {
+		
+			if(element == tempArray[x]){
+			
+				boolCheck = false;
+			}
+		}
+		return boolCheck;
 }
 
 
