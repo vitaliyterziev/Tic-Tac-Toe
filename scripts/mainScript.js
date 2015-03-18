@@ -78,7 +78,7 @@ var movesTrack = function() {
 var winCheck = function(checkedBoxes) {
 
     var counter = 0;
-    var checkedBoxes = checkedBoxes.filter(compatSet);// we need unique ID's in the provided array
+    var checkedBoxes = compatSet(checkedBoxes);// we need unique ID's in the provided array
 
     for (var x = 0; x < winCombinations.length; x++) {
 
@@ -135,19 +135,25 @@ var winDecorator = function(winingCombination) {
 
 
 //filter function for replacing Set() in IE
-var compatSet = function(element) {
+var compatSet = function(arrayToClean) {
 
     var tempArray = [];
     var boolCheck = true;
-    for (var x = 0; x < tempArray.length; x++) {
+    for (var x = 0; x < arrayToClean.length; x++) {
 
-        if (element == tempArray[x]) {
+        for (var y = 0; y < tempArray.length; y++)
 
-            boolCheck = false;
+            if (arrayToClean[x] == tempArray[y]) {
+
+                boolCheck = false;
+            }
+
+        if (boolCheck) {
+
+            tempArray.push(arrayToClean[x]);
         }
     }
-    return boolCheck;
+    return tempArray;
 }
-
 
 //AI Must lie here, one module with couple of functions
