@@ -110,7 +110,7 @@ var winCheck = function(checkedBoxes) {
 //restart button function, all arrays and variables to 0 and setInterval function
 var gameRestart = function() {
 
-    $('td').html("");
+    cleanBoard();
     clickCount = 0, elementCount = 0;
     XboxesClicked = [], OboxesClicked = [];
 
@@ -119,8 +119,6 @@ var gameRestart = function() {
         winCheck(XboxesClicked);
         winCheck(OboxesClicked);
     }, 1000);
-
-    $('td').removeClass('winClass');
 }
 
 
@@ -159,6 +157,25 @@ var compatibleSet = function(array) {
     });
 
     return cleanList;
+}
+
+
+//cleaner for the field
+var cleanBoard = function() {
+
+    var elements = document.querySelectorAll('td');
+    var push = [];
+
+    for (var key in elements) {
+
+        push.push(elements[key])
+    };
+
+    push.forEach(function(a) {
+
+        a.innerHTML = "";
+        a.className = " ";
+    });
 }
 
 
