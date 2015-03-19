@@ -22,5 +22,10 @@ table{
 
 .winClass {
 
-  background-color:#00FFFF;
+    background-color:#ADD8E6;
+}
+
+body{
+
+    background-image: url("../media/back2.jpg");
 }
