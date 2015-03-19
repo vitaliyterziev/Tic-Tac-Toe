@@ -38,14 +38,14 @@ $(document).ready(function() {
 //click helper function, we check clickCount var and decide which picture to apply O or X
 var clickHandler = function() {
 
-    if (!$(this).html()) {
+    if (!this.innerHTML) {
 
         if (clickCount % 2 != 0) {
 
-            $(this).html(imageX);
+            this.innerHTML = imageX;
         } else {
 
-            $(this).html(imageO);
+            this.innerHTML = imageO;
         }
 
         clickCount++;
@@ -56,7 +56,7 @@ var clickHandler = function() {
 //id function for all td boxes
 var idAttach = function() {
 
-    $(this.id = elementCount);
+    this.id = elementCount;
     elementCount++;
 }
 
@@ -64,12 +64,12 @@ var idAttach = function() {
 //tracking moves function and pushing them to 2 arrays 1 for X one for O
 var movesTrack = function() {
 
-    if ($(this).html() == imageX) {
+    if (this.innerHTML == imageX) {
 
-        XboxesClicked.push(parseInt($(this).prop('id')));
-    } else if ($(this).html() == imageO) {
+        XboxesClicked.push(parseInt(this.id));
+    } else if (this.innerHTML == imageO) {
 
-        OboxesClicked.push(parseInt($(this).prop('id')));
+        OboxesClicked.push(parseInt(this.id));
     }
 }
 
@@ -129,7 +129,7 @@ var winDecorator = function(winingCombination) {
 
     winingCombination.forEach(function(comb) {
 
-        $('td').eq(comb).addClass('winClass');
+        document.getElementById(comb).className = ' winClass';
     });
 }
 
