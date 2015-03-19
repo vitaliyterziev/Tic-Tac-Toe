@@ -78,11 +78,11 @@ var movesTrack = function() {
 var winCheck = function(checkedBoxes) {
 
     var counter = 0;
-    var checkedBoxes = new Set(checkedBoxes);// we need unique ID's in the provided array
+    var checkedBoxes = compatibleSet(checkedBoxes);// we need unique ID's in the provided array
 
-    for (var x of winCombinations) {
+    for (var x = 0; x < winCombinations.length; x++) {
 
-        x.forEach(function(entry) {
+        winCombinations[x].forEach(function(entry) {
 
             checkedBoxes.forEach(function(entryC) {
 
@@ -96,8 +96,8 @@ var winCheck = function(checkedBoxes) {
         if (counter == 3) {
 
             //using win function with css class attached to it
-            winDecorator(x);
             clearInterval(interval);
+            winDecorator(winCombinations[x]);
             break;
         } else {
 
@@ -131,6 +131,34 @@ var winDecorator = function(winingCombination) {
 
         $('td').eq(comb).addClass('winClass');
     });
+}
+
+
+//custom Set() crossbrowser
+var compatibleSet = function(array) {
+
+    var cleanList = [];
+    var bool = false;
+
+    array.forEach(function(itemDup) {
+
+        cleanList.forEach(function(noDup) {
+
+            if (noDup == itemDup) {
+
+                bool = true;
+            }
+        });
+
+        if (!bool) {
+
+            cleanList.push(itemDup);
+        }
+
+        bool = false;
+    });
+
+    return cleanList;
 }
 
 
