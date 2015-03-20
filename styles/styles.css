@@ -13,6 +13,8 @@ table{
   width:250px; 
   height:250px; 
   margin-left:50px;
+  background-image: url("../media/back2.jpg");
+  background-size: 100%;
 }
 
 #restart{
@@ -23,9 +25,4 @@ table{
 .winClass {
 
     background-color:#ADD8E6;
-}
-
-body{
-
-    background-image: url("../media/back2.jpg");
 }
