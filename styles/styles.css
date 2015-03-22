@@ -1,28 +1,31 @@
+
 td{
 
   width:83px;
   height:83px;
   background-repeat:no-repeat;
   background-size:50px;
-  border: 2px solid black;
+  border: 1px solid #666666;
+  padding: 0px;
 }
 
 table{
 
   cursor: pointer;
-  width:250px; 
-  height:250px; 
   margin-left:50px;
   background-image: url("../media/back2.jpg");
   background-size: 100%;
+  border-spacing: 0px;
+  border: 1px solid #666666;
 }
 
 #restart{
 
   margin-left:50px;
+  background-color:#00FFFF;
 }
 
 .winClass {
 
-    background-color:black;
+    background-color:#666666;
 }
