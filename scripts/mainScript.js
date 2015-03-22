@@ -17,21 +17,30 @@ var winCombinations = [
     [0, 4, 8],
     [2, 4, 6]
 ];
-var interval = null;
- 
+var win = false;
+
 
 // none AI (PVP)
-$(document).ready(function() {
+docReady(function() {
+    var tdElement = document.getElementsByTagName('td');
+    var len = document.getElementsByTagName('td').length;
 
-    $('td').each(idAttach);
-    $("td").on("click", clickHandler);
-    $("td").on("click", movesTrack);
+    for (var x = 0; x < len; x++) {
 
-    interval = setInterval(function() {
+        tdElement[x].addEventListener("click", clickHandler);
+        tdElement[x].addEventListener("click", movesTrack);
 
-        winCheck(XboxesClicked);
-        winCheck(OboxesClicked);
-    }, 1000);
+        tdElement[x].addEventListener("click", function() {
+		
+			if(!win) {
+				winCheck(XboxesClicked);
+				winCheck(OboxesClicked);
+			}
+        });
+
+        idAttach(tdElement[x]);
+    }
+
 });
 
 
@@ -54,9 +63,9 @@ var clickHandler = function() {
 
 
 //id function for all td boxes
-var idAttach = function() {
+var idAttach = function(el) {
 
-    this.id = elementCount;
+    el.id = elementCount;
     elementCount++;
 }
 
@@ -96,8 +105,8 @@ var winCheck = function(checkedBoxes) {
         if (counter == 3) {
 
             //using win function with css class attached to it
-            clearInterval(interval);
             winDecorator(winCombinations[x]);
+            win = true;
             break;
         } else {
 
@@ -113,12 +122,7 @@ var gameRestart = function() {
     cleanBoard();
     clickCount = 0, elementCount = 0;
     XboxesClicked = [], OboxesClicked = [];
-
-    interval = setInterval(function() {
-
-        winCheck(XboxesClicked);
-        winCheck(OboxesClicked);
-    }, 1000);
+    win = false;
 }
 
 
