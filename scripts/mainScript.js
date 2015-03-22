@@ -31,7 +31,7 @@ $(document).ready(function() {
 
         winCheck(XboxesClicked);
         winCheck(OboxesClicked);
-    }, 500);
+    }, 1000);
 });
 
 
@@ -118,7 +118,7 @@ var gameRestart = function() {
 
         winCheck(XboxesClicked);
         winCheck(OboxesClicked);
-    }, 500);
+    }, 1000);
 }
 
 
