@@ -5,7 +5,7 @@ td{
   height:83px;
   background-repeat:no-repeat;
   background-size:50px;
-  border: 1px solid #666666;
+  border: 1px solid black;
   padding: 0px;
 }
 
@@ -16,7 +16,7 @@ table{
   background-image: url("../media/back2.jpg");
   background-size: 100%;
   border-spacing: 0px;
-  border: 1px solid #666666;
+  border: 1px solid black;
 }
 
 #restart{
@@ -27,5 +27,5 @@ table{
 
 .winClass {
 
-    background-color:#666666;
+    background-color:#00FFFF;
 }
