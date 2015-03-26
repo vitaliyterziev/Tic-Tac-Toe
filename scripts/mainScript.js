@@ -33,6 +33,12 @@ docReady(function() {
         tdElement[x].addEventListener("click", function() {
 		
 			if(!win) {
+                
+                if(clickCount % 2 != 0) {
+                    
+                    computer.executeMove(computer);
+                }
+                
 				winCheck(XboxesClicked);
 				winCheck(OboxesClicked);
 			}
@@ -59,7 +65,7 @@ var clickHandler = function() {
 
         clickCount++;
     }
-}
+};
 
 
 //id function for all td boxes
@@ -67,7 +73,7 @@ var idAttach = function(el) {
 
     el.id = elementCount;
     elementCount++;
-}
+};
 
 
 //tracking moves function and pushing them to 2 arrays 1 for X one for O
@@ -75,12 +81,12 @@ var movesTrack = function() {
 
     if (this.innerHTML == imageX) {
 
-        XboxesClicked.push(parseInt(this.id));
+        XboxesClicked.push(parseInt(this.id,10));
     } else if (this.innerHTML == imageO) {
 
-        OboxesClicked.push(parseInt(this.id));
+        OboxesClicked.push(parseInt(this.id,10));
     }
-}
+};
 
 
 //win function, checking O and X array with winCombinations array
@@ -113,7 +119,7 @@ var winCheck = function(checkedBoxes) {
             counter = 0;
         }
     }
-}
+};
 
 
 //restart button function, all arrays and variables to 0 and setInterval function
@@ -123,7 +129,7 @@ var gameRestart = function() {
     clickCount = 0, elementCount = 0;
     XboxesClicked = [], OboxesClicked = [];
     win = false;
-}
+};
 
 
 //add style to wining boxes
@@ -133,7 +139,7 @@ var winDecorator = function(winingCombination) {
 
         document.getElementById(comb).className = ' winClass';
     });
-}
+};
 
 
 //custom Set() crossbrowser
@@ -161,7 +167,7 @@ var compatibleSet = function(array) {
     });
 
     return cleanList;
-}
+};
 
 
 //cleaner for the field
@@ -172,15 +178,64 @@ var cleanBoard = function() {
 
     for (var key in elements) {
 
-        push.push(elements[key])
-    };
+        push.push(elements[key]);
+    }
 
     push.forEach(function(a) {
 
         a.innerHTML = "";
         a.className = " ";
     });
-}
+};
 
 
-//AI Must lie here, one module with couple of functions
+//AI settup (randomMove - finished, attack and deffend - pending)
+var computer = {
+
+    availableMoves: function() {
+
+        var ids = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+        var recordMoves = [];
+        recordMoves = recordMoves.concat(XboxesClicked, OboxesClicked);
+        recordMoves = compatibleSet(recordMoves);
+
+        return ids.filter(function(elAv) { //available moves, RETURN statement here
+
+            var bools = true;
+            recordMoves.forEach(function(elRec) { //recorded moves
+
+                if (elAv === elRec) {
+
+                    bools = false;
+                }
+            });
+
+            return bools;
+        });
+    },
+    attackMove: function() {
+
+        return false;
+    },
+    deffendMove: function() {
+
+        return false;
+    },
+    randomMove: function() {
+
+        var clickCell = computer.availableMoves();
+
+        var index = Math.floor(Math.random() * clickCell.length - 1) + 1;
+
+        return clickCell[index];
+    },
+    executeMove: function(object) {
+
+        var clickMove = object.attackMove() || object.deffendMove() || object.randomMove();
+
+        document.getElementsByTagName('td')[clickMove].click();
+    }
+};
+
+
