@@ -236,7 +236,7 @@ var computer = {
 
          if(clickMove != undefined) {
             document.getElementsByTagName('td')[clickMove].click();
-        }
+         }
     }
 };
 
