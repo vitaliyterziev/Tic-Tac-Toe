@@ -31,17 +31,17 @@ docReady(function() {
         tdElement[x].addEventListener("click", movesTrack);
 
         tdElement[x].addEventListener("click", function() {
-		
-			if(!win) {
-                
-                if(clickCount % 2 != 0) {
-                    
+
+            if (!win) {
+
+                if (clickCount % 2 != 0) {
+
                     computer.executeMove(computer);
                 }
-                
-				winCheck(XboxesClicked);
-				winCheck(OboxesClicked);
-			}
+
+                winCheck(XboxesClicked);
+                winCheck(OboxesClicked);
+            }
         });
 
         idAttach(tdElement[x]);
@@ -81,10 +81,10 @@ var movesTrack = function() {
 
     if (this.innerHTML == imageX) {
 
-        XboxesClicked.push(parseInt(this.id,10));
+        XboxesClicked.push(parseInt(this.id, 10));
     } else if (this.innerHTML == imageO) {
 
-        OboxesClicked.push(parseInt(this.id,10));
+        OboxesClicked.push(parseInt(this.id, 10));
     }
 };
 
@@ -93,7 +93,7 @@ var movesTrack = function() {
 var winCheck = function(checkedBoxes) {
 
     var counter = 0;
-    var checkedBoxes = compatibleSet(checkedBoxes);// we need unique ID's in the provided array
+    var checkedBoxes = compatibleSet(checkedBoxes); // we need unique ID's in the provided array
 
     for (var x = 0; x < winCombinations.length; x++) {
 
@@ -234,10 +234,9 @@ var computer = {
 
         var clickMove = object.attackMove() || object.deffendMove() || object.randomMove();
 
-         if(clickMove != undefined) {
+        if (clickMove != undefined) {
             document.getElementsByTagName('td')[clickMove].click();
-         }
+        }
     }
 };
-
 
