@@ -234,7 +234,9 @@ var computer = {
 
         var clickMove = object.attackMove() || object.deffendMove() || object.randomMove();
 
-        document.getElementsByTagName('td')[clickMove].click();
+         if(clickMove != undefined) {
+            document.getElementsByTagName('td')[clickMove].click();
+        }
     }
 };
 
