@@ -21,7 +21,7 @@ var win = false;
 
 
 // none AI (PVP)
-docReady(function() {
+docReady(function () {
     var tdElement = document.getElementsByTagName('td');
     var len = document.getElementsByTagName('td').length;
 
@@ -30,7 +30,7 @@ docReady(function() {
         tdElement[x].addEventListener("click", clickHandler);
         tdElement[x].addEventListener("click", movesTrack);
 
-        tdElement[x].addEventListener("click", function() {
+        tdElement[x].addEventListener("click", function () {
 
             if (!win) {
 
@@ -39,8 +39,8 @@ docReady(function() {
                     computer.executeMove(computer);
                 }
 
-                winCheck(XboxesClicked);
                 winCheck(OboxesClicked);
+                winCheck(XboxesClicked);
             }
         });
 
@@ -51,7 +51,7 @@ docReady(function() {
 
 
 //click helper function, we check clickCount var and decide which picture to apply O or X
-var clickHandler = function() {
+var clickHandler = function () {
 
     if (!this.innerHTML) {
 
@@ -69,7 +69,7 @@ var clickHandler = function() {
 
 
 //id function for all td boxes
-var idAttach = function(el) {
+var idAttach = function (el) {
 
     el.id = elementCount;
     elementCount++;
@@ -77,7 +77,7 @@ var idAttach = function(el) {
 
 
 //tracking moves function and pushing them to 2 arrays 1 for X one for O
-var movesTrack = function() {
+var movesTrack = function () {
 
     if (this.innerHTML == imageX) {
 
@@ -90,16 +90,16 @@ var movesTrack = function() {
 
 
 //win function, checking O and X array with winCombinations array
-var winCheck = function(checkedBoxes) {
+var winCheck = function (checkedBoxes) {
 
     var counter = 0;
     var checkedBoxes = compatibleSet(checkedBoxes); // we need unique ID's in the provided array
 
     for (var x = 0; x < winCombinations.length; x++) {
 
-        winCombinations[x].forEach(function(entry) {
+        winCombinations[x].forEach(function (entry) {
 
-            checkedBoxes.forEach(function(entryC) {
+            checkedBoxes.forEach(function (entryC) {
 
                 if (entry == entryC) {
 
@@ -123,7 +123,7 @@ var winCheck = function(checkedBoxes) {
 
 
 //restart button function, all arrays and variables to 0 and setInterval function
-var gameRestart = function() {
+var gameRestart = function () {
 
     cleanBoard();
     clickCount = 0, elementCount = 0;
@@ -133,24 +133,26 @@ var gameRestart = function() {
 
 
 //add style to wining boxes
-var winDecorator = function(winingCombination) {
+var winDecorator = function (winingCombination) {
 
-    winingCombination.forEach(function(comb) {
+    if (!win) {
+        winingCombination.forEach(function (comb) {
 
-        document.getElementById(comb).className = ' winClass';
-    });
+            document.getElementById(comb).className = ' winClass';
+        });
+    }
 };
 
 
 //custom Set() crossbrowser
-var compatibleSet = function(array) {
+var compatibleSet = function (array) {
 
     var cleanList = [];
     var bool = false;
 
-    array.forEach(function(itemDup) {
+    array.forEach(function (itemDup) {
 
-        cleanList.forEach(function(noDup) {
+        cleanList.forEach(function (noDup) {
 
             if (noDup == itemDup) {
 
@@ -171,7 +173,7 @@ var compatibleSet = function(array) {
 
 
 //cleaner for the field
-var cleanBoard = function() {
+var cleanBoard = function () {
 
     var elements = document.querySelectorAll('td');
     var push = [];
@@ -181,7 +183,7 @@ var cleanBoard = function() {
         push.push(elements[key]);
     }
 
-    push.forEach(function(a) {
+    push.forEach(function (a) {
 
         a.innerHTML = "";
         a.className = " ";
@@ -189,10 +191,10 @@ var cleanBoard = function() {
 };
 
 
-//AI settup (randomMove - finished, attack and deffend - pending)
+//AI module
 var computer = {
 
-    availableMoves: function() {
+    availableMoves: function () {
 
         var ids = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -200,10 +202,10 @@ var computer = {
         recordMoves = recordMoves.concat(XboxesClicked, OboxesClicked);
         recordMoves = compatibleSet(recordMoves);
 
-        return ids.filter(function(elAv) { //available moves, RETURN statement here
+        return ids.filter(function (elAv) { //available moves, RETURN statement here
 
             var bools = true;
-            recordMoves.forEach(function(elRec) { //recorded moves
+            recordMoves.forEach(function (elRec) { //recorded moves
 
                 if (elAv === elRec) {
 
@@ -214,29 +216,87 @@ var computer = {
             return bools;
         });
     },
-    attackMove: function() {
+    attackMove: function () {
 
-        return false;
+        return computerMoveHelper(compatibleSet(XboxesClicked), computer.availableMoves());
     },
-    deffendMove: function() {
+    deffendMove: function () {
 
-        return false;
+        return computerMoveHelper(compatibleSet(OboxesClicked), computer.availableMoves());
     },
-    randomMove: function() {
+    randomMove: function () {
 
         var clickCell = computer.availableMoves();
+        var index;
 
-        var index = Math.floor(Math.random() * clickCell.length - 1) + 1;
+        //allways click middle if not clicked already
+        clickCell.forEach(function (el) {
 
-        return clickCell[index];
+            if (4 == el) {
+
+                index = clickCell.indexOf(4);
+            }
+        });
+
+        return clickCell[index] || clickCell[Math.floor(Math.random() * clickCell.length - 1) + 1];
     },
-    executeMove: function(object) {
+    executeMove: function (object) {
 
         var clickMove = object.attackMove() || object.deffendMove() || object.randomMove();
 
-        if (clickMove != undefined) {
+        if (clickMove != undefined && clickMove != 100) {
+
             document.getElementsByTagName('td')[clickMove].click();
+        } else if (clickMove == 100) {
+
+            document.getElementsByTagName('td')[clickMove - 100].click();
         }
+    }
+};
+
+
+//helper function for computer object, can be used on both attack and defence, iterate over - winCombinations,clickedBoxes,availableBoxes
+var computerMoveHelper = function (clickArray, availableMovesArray) {
+
+    var counter = 0;
+    var move,
+        deffendMove;
+
+    winCombinations.forEach(function (insideWinArray) {
+
+        clickArray.forEach(function (insideElementClick) {
+
+            insideWinArray.forEach(function (insideElementWin) {
+
+                if (insideElementWin == insideElementClick) {
+
+                    counter++;
+                }
+                availableMovesArray.forEach(function (elAv) {
+
+                    if (insideElementWin == (elAv)) {
+
+                        move = insideElementWin;
+                    }
+                });
+            });
+        });
+
+        if (counter == 2 && move != undefined) {
+
+            deffendMove = move;
+        }
+
+        counter = 0;
+        move = undefined;
+    });
+
+    if (deffendMove === 0) {
+
+        return deffendMove + 100;
+    } else {
+
+        return deffendMove;
     }
 };
 
