@@ -1,31 +1,37 @@
-
 td{
 
-  width:83px;
-  height:83px;
-  background-repeat:no-repeat;
-  background-size:50px;
-  border: 1px solid black;
+  width: 83px;
+  height: 83px;
+  background-repeat: no-repeat;
+  background-size: 50px;
+  border: 3px solid #FFCC00;
+  border-radius: 30px;
   padding: 0px;
 }
 
 table{
 
   cursor: pointer;
-  margin-left:50px;
-  background-image: url("../media/back2.jpg");
+  margin-left: 50px;
+  #background-image: url("../media/back2.jpg");
   background-size: 100%;
   border-spacing: 0px;
-  border: 1px solid black;
 }
 
 #restart{
 
-  margin-left:50px;
-  background-color:#00FFFF;
+  margin-left: 50px;
+  background-color: #FFCC00;
+  border-radius: 25px;
+  font-family: Verdana;
 }
 
 .winClass {
 
-    background-color:#00FFFF;
+    background-color: #FFCC00;
+}
+
+h1{
+
+    font-family: Verdana;
 }
